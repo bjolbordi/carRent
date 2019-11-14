@@ -1,0 +1,13 @@
+User-agent: *
+
+#Disallow: /
+Disallow: /admin/
+Disallow: /controllers/
+Disallow: /models/
+Disallow: /upload/
+Disallow: /cache/
+Disallow: /core/
+Disallow: /libs/
+Disallow: /langs/
+
+

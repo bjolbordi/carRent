@@ -1,0 +1,8 @@
+.idea
+/langs/*/
+/admin/langs
+/cache/*/
+/bower_components
+/node_modules
+/upload
+.vscode

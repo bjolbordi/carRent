@@ -1,0 +1,135 @@
+/* menu */
+
+.sortable {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 20px;
+}
+
+.sortable li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 3px;
+    font-size: 1.2em;
+    width: 100%;
+    padding-left: 30px;
+    border: 1px solid #eee;
+    background-color: #fff
+}
+
+.sortable.level-1 li {
+    padding-left: 10px;
+}
+
+.ui-sortable-placeholder {
+    height: 30px;
+}
+
+.sortable.level-1 {
+    padding-bottom: 50px;
+}
+
+table.menu td {
+    border: 0;
+    padding-bottom: 0;
+}
+
+
+/* images */
+
+.image-div {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    margin-top: 15px;
+    height: 150px;
+}
+
+.image-div img {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.image-action {
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    display: none;
+    z-index: 2;
+}
+
+.image-div:hover>.image-action {
+    display: block;
+}
+
+.image-div:hover:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.image-div.cover img {
+    border-color: #009900;
+    border-width: 2px;
+}
+
+input[type=color] {
+    padding: 2px;
+}
+
+.image-thumbnail {
+    /*white-space: nowrap;*/
+}
+
+.center-radio {
+    margin: 0;
+    top: 4px;
+}
+
+.thumbnail-image {
+    width: 50px;
+    height: 50px;
+    margin: 0 15px 0 0;
+    display: block;
+}
+
+.image-text {
+    display: inline-block;
+    width: 200px;
+}
+
+.color-block-container {
+    margin-bottom: 5px;
+}
+
+.color-block-container span {
+    position: relative;
+    top: -2px;
+}
+
+.color-block {
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.side-menu-list .fa {
+    display: inline-block;
+    text-align: center;
+    width: 20px;
+}
+.autocomplete-suggestions { border: 1px solid #999; background: #fff; cursor: default; overflow: auto; }
+.autocomplete-suggestion { padding: 10px 5px; font-size: 1.2em; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #f0f0f0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399ff; }

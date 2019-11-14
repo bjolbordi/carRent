@@ -1,0 +1,18 @@
+<filesMatch ".(jpg|jpeg|JPG|JPEG|gif|png|svg|woff|woff2|ttf|eot|css|js)$">
+    Header set Cache-Control "max-age=2419200, public, must-revalidate"
+</filesMatch>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(jpg|jpeg|JPG|JPEG|gif|png|svg|ttf|ttc|otf|eot|woff|woff2|css)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond $1 !\.(gif|jpe?g|png|svg|js|css)$ [NC]
+
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
