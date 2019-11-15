@@ -65,39 +65,17 @@ class MainModel extends Model
 
     public function GetProducts($Type, $Limit)
     {
-        $Where = '';
-        $OrderBy = '';
-        if($Type == 1)
-            $OrderBy = 'p.views DESC';
-        if($Type == 2){
-            $OrderBy = 'sale DESC, rand()';
-            $Where = ' AND IF(v.variant_id, v.sale, p.sale) > 0';
-        }
-        if($Type == 3){
-            $OrderBy = 'p.product_id DESC';
-        }
-        if($Type == 4){
-            $OrderBy = 'rand()';
-            $Where = ' AND p.featured = 1';
-        }
-        return  $this->DB->GetAll('SELECT
-									p.product_id,
-									IF(v.variant_id, v.sale, p.sale) AS sale,
-									IF(v.variant_id, v.sale_end_date, p.sale_end_date) AS sale_end_date,
-									IF(v.variant_id, v.price, p.price) AS price,
-									IF(v.variant_id, v.quantity, p.quantity) AS quantity,
-									v.variant_id,
-									IF(vi.photo_id, i2.photo_name, i.photo_name) AS image,
-									t.title,
-									CEIL(time_to_sec(timediff(p.created_date, now()))/3600/24) as days_left
-									FROM products p
-									LEFT JOIN products_trans t ON t.product_id = p.product_id
-									LEFT JOIN products_variants v ON v.product_id = p.product_id AND v.default = 1
-									LEFT JOIN product_photos i ON i.content_id = p.product_id AND i.ordering = 1
-									LEFT JOIN products_variant_photos vi ON vi.variant_id = v.variant_id
-									LEFT JOIN product_photos i2 ON i2.photo_id = vi.photo_id 
-									WHERE t.lang_id = ?i AND p.status_id = 1 ' . $Where . '
-									GROUP BY p.product_id ORDER BY ' . $OrderBy . ' LIMIT ' . $Limit, Lang::GetLangID());
+        $OrderBy = 'p.id DESC';
+        return $Data = $this->DB->GetAll('SELECT
+                  *
+                  FROM cars p
+                  LEFT JOIN cars_trans t ON t.car_id = p.id
+                  LEFT JOIN car_photos i ON i.car_id = p.id
+                  LEFT JOIN car_features v ON v.car_id = p.id
+                  WHERE t.lang_id = ?i AND p.status = 1 
+                  ORDER BY ' . $OrderBy . ' LIMIT ' . $Limit, 
+                  Lang::GetLangID()
+                );
     }
 
 }

@@ -15,25 +15,24 @@ class ProductModel extends Model
         if($Word)
             $Where = 'AND t.title LIKE "%' . $Word . '%" ';
         if(is_numeric($Word))
-            $Where = 'AND p.product_id = '.$Word.'';
+            $Where = 'AND p.id = '.$Word.'';
         $Limit = Functions::PageLimits(CONTENT_PER_PAGE);
 
         $Data = $this->DB->GetAll('SELECT SQL_CALC_FOUND_ROWS
-									p.product_id,
-									p.status_id,
+									p.id,
+									p.status,
 									p.views,
-									p.created_date,
-									IF(v.variant_id, v.pipedrive_id, p.pipedrive_id) AS pipedrive_id,
+									p.created_at,
 									i.photo_name as image,
-									t.title,
+									t.car_title,
 									t.lang_id
-									FROM products p
-									LEFT JOIN products_trans t ON t.product_id = p.product_id
-									LEFT JOIN products_variants v ON v.product_id = p.product_id AND v.default = 1
-									LEFT JOIN product_photos i ON i.content_id = p.product_id AND i.ordering = 1
-									WHERE t.lang_id = 1 AND p.status_id != 0 ' . $Where . '
-									GROUP BY p.product_id
-									ORDER BY p.product_id DESC ' . $Limit);
+									FROM cars p
+									LEFT JOIN cars_trans t ON t.car_id = p.id
+									LEFT JOIN car_features v ON v.car_id = p.id
+									LEFT JOIN car_photos i ON i.car_id = p.id
+									WHERE t.lang_id = 1 AND p.status != 0 ' . $Where . '
+									GROUP BY p.id
+									ORDER BY p.id DESC ' . $Limit);
         $this->Params['ContentCount'] = $this->DB->GetOne('SELECT found_rows()');
         $this->SetResult(true, '', $Data);
         return $this->Result;
@@ -75,134 +74,8 @@ class ProductModel extends Model
         return $this->Result;
     }
 
-    public function GetCategories()
-    {
-        $Data = $this->DB->GetAll('SELECT
-									c.* ,
-									t.title
-									FROM product_categories c
-									LEFT JOIN product_categories_trans t ON t.category_id = c.category_id
-									WHERE t.lang_id = 1
-									ORDER BY c.ordering ASC');
-        $this->SetResult(true, '', $Data);
-        return $this->Result;
-    }
 
-    public function GetProductCategories($Id)
-    {
-        $Array = [];
-        $Data = $this->DB->GetAll('SELECT
-                                    *
-									FROM product_to_categories c
-									WHERE product_id = ?i', $Id);
-        foreach ($Data as $value){
-            $Array[$value['category_id']] = $value;
-        }
-        $this->SetResult(true, '', $Array);
-        return $this->Result;
-    }
 
-    public function GetBrands()
-    {
-        $Data = $this->DB->GetAll('SELECT
-									*
-									FROM brands
-									ORDER BY ordering ASC');
-        $this->SetResult(true, '', $Data);
-        return $this->Result;
-    }
-
-    public function GetTags($Id = 0)
-    {
-        $Array = [];
-        if($Id){
-            $Data = $this->DB->GetAll('SELECT
-									t.tag_name
-									FROM product_to_tags pt
-									LEFT JOIN product_tags t ON t.tag_id = pt.tag_id
-									WHERE pt.product_id = ?i', $Id);
-        }else{
-            $Data = $this->DB->GetAll('SELECT
-									t.tag_name
-									FROM product_to_tags pt
-									LEFT JOIN product_tags t ON t.tag_id = pt.tag_id');
-        }
-
-        foreach ($Data as $Val){
-            $Array[] = $Val['tag_name'];
-        }
-        $this->SetResult(true, '', $Array);
-        return $this->Result;
-    }
-
-    public function GetAttributes()
-    {
-        $Array = [];
-        $Data = $this->DB->GetAll('SELECT
-                                    v.attr_value_id,
-                                    v.attr_id,
-                                    v.color,
-                                    v.ordering,
-                                    at.title as attr_title,
-                                    avt.title,
-                                    attrs.type_id
-                                    FROM
-                                    attr_values v
-                                    INNER JOIN attr_values_trans avt ON v.attr_value_id = avt.attr_value_id AND avt.lang_id = 1 
-                                    INNER JOIN attrs ON v.attr_id = attrs.attr_id
-                                    INNER JOIN attr_trans at ON attrs.attr_id = at.attr_id AND at.lang_id = 1 
-                                    ORDER BY attrs.ordering ASC, v.ordering ASC');
-        foreach ($Data as $value){
-            $Array[$value['attr_id']]['values'][] = $value;
-            $Array[$value['attr_id']]['title'] = $value['attr_title'];
-        }
-        $this->SetResult(true, '', $Array);
-        return $this->Result;
-    }
-
-    public function GetVariants($ProductId)
-    {
-        $Data = $this->DB->GetAll('SELECT
-                                    v.variant_id,
-                                    v.product_id,
-                                    v.price,
-                                    v.quantity,
-                                    v.sku,
-                                    v.default,
-                                    pva.attr_value_id,
-                                    at.title as attr_title,
-                                    avt.title,
-                                    GROUP_CONCAT(at.title, ": ", IF(avt.title IS NOT NULL, avt.title, av.color)) as attributes,
-                                    (SELECT i.photo_name 
-                                    FROM products_variant_photos vi 
-                                    LEFT JOIN product_photos i ON i.photo_id = vi.photo_id
-                                    WHERE v.variant_id = vi.variant_id LIMIT 1) as variant_photo_name,
-                                    i.photo_name
-                                    FROM
-                                    products_variant_attrs pva
-                                    LEFT JOIN products_variants v ON v.variant_id = pva.variant_id
-                                    LEFT JOIN attr_values av ON av.attr_value_id = pva.attr_value_id
-                                    INNER JOIN attr_values_trans avt ON av.attr_value_id = avt.attr_value_id AND avt.lang_id = 1 
-                                    LEFT JOIN attrs ON av.attr_id = attrs.attr_id
-                                    INNER JOIN attr_trans at ON attrs.attr_id = at.attr_id AND at.lang_id = 1
-                                    LEFT JOIN product_photos i ON i.content_id = v.product_id AND i.ordering = 1
-                                    WHERE v.product_id = ?i
-                                    GROUP BY v.variant_id
-                                    ORDER BY av.ordering ASC ', $ProductId);
-
-        $this->SetResult(true, '', $Data);
-        return $this->Result;
-    }
-
-    public function GetVariant($Id)
-    {
-        $Data = $this->DB->GetRow('SELECT
-									v.*
-									FROM products_variants v
-									WHERE v.variant_id = ?i', $Id);
-        $this->SetResult(true, '', $Data);
-        return $this->Result;
-    }
 
     public function GetVariantImages($Id)
     {
@@ -263,82 +136,6 @@ class ProductModel extends Model
         return $this->Result;
     }
 
-    public function createCombinations($list)
-    {
-        if (count($list) <= 1) {
-            return count($list) ? array_map(create_function('$v', 'return (array($v));'), $list[0]) : $list;
-        }
-        $res = array();
-        $first = array_pop($list);
-        foreach ($first as $attribute) {
-            $tab = $this->createCombinations($list);
-            foreach ($tab as $to_add) {
-                $res[] = is_array($to_add) ? array_merge($to_add, array($attribute)) : array($to_add, $attribute);
-            }
-        }
-        return $res;
-    }
-
-    private function CheckAttr($Id, $Attr)
-    {
-        $In = implode(',', $Attr);
-        $VariantId = $this->DB->GetOne('SELECT 
-                                    pva.variant_id
-                                    FROM
-                                    products_variant_attrs pva
-                                    WHERE pva.product_id = ?i AND pva.attr_value_id IN('.$In.')
-                                    GROUP BY pva.variant_id
-                                    HAVING(count(pva.variant_id) = ?i)
-                                    ', $Id, count($Attr));
-
-        return $VariantId;
-    }
-
-    public function EditVariant($Id, $Post)
-    {   $Default =  isset($Post['default']) ? $Post['default'] : 0;
-        if($Default){
-            $this->DB->Query('UPDATE products_variants SET `default` = 0 WHERE product_id = ?i', (int)$Post['product_id']);
-            $this->DB->Query('UPDATE products_variants SET `default` = 1 WHERE variant_id = ?i', (int)$Id);
-        }
-        if(isset($Post['sale'])){
-            $this->DB->Query('UPDATE products_variants SET code = ?s, sale = ?s, sale_end_date = ?s WHERE variant_id = ?i',
-                $Post['code'], $Post['sale'], $Post['sale_end_date'], $Id);
-        }
-        if(isset($Post['price'])){
-            $Item['price'] = $Post['price'];
-            $Item['sku'] = $Post['sku'];
-            $Item['quantity'] = (int)$Post['quantity'];
-            $this->DB->Query('UPDATE products_variants SET ?u WHERE variant_id = ?i', $Item, $Id);
-        }
-        $this->SetResult(true, 'Success');
-        return $this->Result;
-    }
-
-    public function EditVariantImages($Id, $Post)
-    {
-        $Item['photo_id'] = (int)$Post['photo_id'];
-        $Item['variant_id'] = (int)$Post['variant_id'];
-        if($Post['add'])
-            $this->DB->Query('INSERT IGNORE products_variant_photos SET ?u', $Item);
-        else
-            $this->DB->Query('DELETE FROM products_variant_photos WHERE photo_id = ?i AND variant_id = ?i', $Item['photo_id'] , $Item['variant_id']);
-
-        $this->SetResult(true, 'Success');
-        return $this->Result;
-    }
-
-    public function RemoveVariant($Id)
-    {
-        $Default = $this->DB->GetOne('SELECT `default` FROM products_variants  WHERE variant_id = ?i', $Id);
-        if($Default)
-            $this->DB->Query('UPDATE products_variants SET `default` = 1 WHERE variant_id != ?i  ORDER BY variant_id DESC LIMIT 1', $Id);
-        $this->DB->Query('DELETE FROM products_variants WHERE variant_id = ?i', $Id);
-        $this->DB->Query('DELETE FROM products_variant_photos WHERE variant_id = ?i', $Id);
-        $this->DB->Query('DELETE FROM products_variant_attrs WHERE variant_id = ?i', $Id);
-
-        $this->SetResult(true, 'Success');
-        return $this->Result;
-    }
 
     public function UploadImage($ProductId = false)
     {
@@ -389,6 +186,68 @@ class ProductModel extends Model
 
         return $Result;
     }
+
+    public function Insert($Post)
+	{
+
+       
+		$Params['price'] = (isset($Post['price']) ? $Post['price'] : 0);
+        $Params['status'] = 1;
+        
+		$this->DB->Query('INSERT INTO cars SET ?u ', $Params);
+		$Id = $this->DB->insertId();
+       
+		foreach ($Post as $Lang => $Val) {
+            
+            
+			if(is_array($Val)){
+				$Val['lang_id'] = $Lang;
+				$Val['car_id'] = $Id;
+				$this->DB->Query('INSERT INTO cars_trans SET ?u', $Val);
+			}
+		}
+        
+
+		if(Request::File('images')['name']){
+			$Image = new Image();
+			$AllowedExts = ["jpeg", "jpg", "png", "JPG", "JPEG"];
+			$i = 0;
+			foreach(Request::File('images')['tmp_name'] as $TmpName){
+
+				$Path = Request::File('images')['name'][$i];
+				$Ext = pathinfo($Path, PATHINFO_EXTENSION);
+
+				if (!in_array($Ext, $AllowedExts))
+				{
+					$this->SetResult(true, 'Supported image formats  jpeg, jpg, png ');
+					return $this->Result;
+				}
+
+				$Microtime = ceil(microtime(false) * 1000).time();
+				$ImagePath = UPLOAD_PATH . 'cars/' .$Microtime . '.'. $Ext;
+
+                if(!is_dir(UPLOAD_PATH . 'cars/'))
+                    mkdir(UPLOAD_PATH . 'cars/');
+
+				if (move_uploaded_file($TmpName, $ImagePath))
+				{
+					$ThumbPath =  UPLOAD_PATH . 'cars/';
+					$Image::createThumb($ImagePath, $ThumbPath, 'l_', NEWS_WIDTH_L, NEWS_HEIGHT_L, true, 90, '');
+                    $Image::createThumb($ImagePath, $ThumbPath, 'm_', NEWS_WIDTH_M, NEWS_HEIGHT_M, false, 90, '');
+					$Image::createThumb($ImagePath, $ThumbPath, 's_', NEWS_WIDTH_S, NEWS_HEIGHT_S, true, 90, '');
+				}
+				$this->DB->Query('INSERT INTO car_photos SET car_id = ?i, photo_name = ?s', $Id, $Microtime.'.'.$Ext);
+				$i++;
+			}
+
+			//if(!$this->DB->GetOne('SELECT count(0) FROM car_photos  WHERE car_id = ?i AND photo_cover = 1', $Id))
+				//$this->DB->Query('UPDATE car_photos SET content_photo_cover = 1 WHERE content_id = ?i LIMIT 1',$Id);
+
+		}
+
+		$this->SetResult(true, 'Success');
+		return $this->Result;
+	}
 
     public function InsertItem()
     {

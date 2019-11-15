@@ -10,8 +10,9 @@ require_once 'core/Model.php';
 require_once 'core/View.php';
 
 // Load Libs And Twig
-function __autoload($Class)
-{
+
+spl_autoload_register(function($Class) {
+
     if(!preg_match('/Twig/', $Class))
     {
         if(file_exists(ADMIN_LIBS . $Class . '.php'))
@@ -34,4 +35,4 @@ function __autoload($Class)
         }
     }
 
-}
+});

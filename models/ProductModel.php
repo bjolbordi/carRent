@@ -106,38 +106,25 @@ class ProductModel extends Model
 	public function GetProducts($Page, $PerPage)
 	{
 
-        $Where = $this->BuildQuery();
-        $Order = $this->BuildOrderQuery();
+        /*$Where = $this->BuildQuery();
+        $Order = $this->BuildOrderQuery();*/
 
-        $Default = '';
+       /* $Default = '';
         if(Request::Get('color') == '' && Request::Get('attr') == '' && Request::Get('price_from') == '' && Request::Get('price_to') == '')
-            $Default = ' AND v.default = 1';
+            $Default = ' AND v.default = 1';*/
 
         $Start = $Page ? $PerPage * ($Page - 1) : 1;
         $Limit = ' LIMIT ' . $Start . ', ' . $PerPage . '';
 
         $Data = $this->DB->GetAll('SELECT SQL_CALC_FOUND_ROWS
-									p.product_id,
-									IF(v.variant_id, v.sale, p.sale) AS sale,
-									IF(v.variant_id, v.sale_end_date, p.sale_end_date) AS sale_end_date,
-									IF(v.variant_id, v.price, p.price) AS price,
-									IF(v.variant_id, v.quantity, p.quantity) AS quantity,
-									v.variant_id,
-									IF(vi.photo_id, i2.photo_name, i.photo_name) AS image,
-									t.title,
-									CEIL(time_to_sec(timediff(p.created_date, now()))/3600/24) as days_left
-									FROM products p
-									LEFT JOIN products_trans t ON t.product_id = p.product_id
-									LEFT JOIN products_variants v ON v.product_id = p.product_id '.$Default.'
-									LEFT JOIN product_photos i ON i.content_id = p.product_id AND i.ordering = 1
-									LEFT JOIN products_variant_photos vi ON vi.variant_id = v.variant_id
-									LEFT JOIN product_photos i2 ON i2.photo_id = vi.photo_id
-									LEFT JOIN product_to_categories c ON c.product_id = p.product_id
-									LEFT JOIN products_variant_attrs pva ON pva.variant_id = v.variant_id
-									LEFT JOIN brands b ON b.brand_id = p.brand_id
-									WHERE t.lang_id = ?i AND p.status_id = 1 
-									'.$Where.'
-									GROUP BY p.product_id ORDER BY ' . $Order . ' '. $Limit, Lang::GetLangID());
+									p.id,
+									FROM cars p
+									LEFT JOIN cars_trans t ON t.car_id = p.id
+									LEFT JOIN car_photos i ON i.car_id = p.id
+									LEFT JOIN car_features v ON v.car_id = p.id
+									WHERE t.lang_id = ?i AND p.status = 1 
+									
+									GROUP BY p.id ORDER BY '. $Limit, Lang::GetLangID());
 
         $this->Count = $this->DB->GetOne('SELECT FOUND_ROWS()');
         return $Data;
@@ -217,29 +204,21 @@ class ProductModel extends Model
         return $Order;
     }
 
-	public function GetProduct($ProductId, $VariantId)
+	public function GetProduct($ProductId)
 	{
-        $Join = 'LEFT JOIN products_variants v ON v.product_id = p.product_id AND v.default = 1';
-        if($VariantId)
-            $Join = 'LEFT JOIN products_variants v ON v.product_id = p.product_id AND v.variant_id = ' . $VariantId;
-        $this->UpdateViews($ProductId);
+        
+        
+        
         return $this->DB->GetRow('SELECT
-									p.product_id,
-									IF(v.variant_id, v.sale, p.sale) AS sale,
-									IF(v.variant_id, v.sale_end_date, p.sale_end_date) AS sale_end_date,
-									IF(v.variant_id, v.price, p.price) AS price,
-									IF(v.variant_id, v.quantity, p.quantity) AS quantity,
-									IF(v.variant_id, v.code, "") AS code,
-									t.title,
-									t.desc,
-									t.lang_id,
-									b.title as brand,
-									v.variant_id
-									FROM products p
-									LEFT JOIN products_trans t ON t.product_id = p.product_id AND t.lang_id = ?i
-									LEFT JOIN brands b ON b.brand_id = p.brand_id
-									'.$Join.'
-									WHERE p.product_id = ?i AND p.status_id = 1',Lang::GetLangID(), (int)$ProductId);
+                                    *
+									FROM cars p
+                                    LEFT JOIN cars_trans t ON t.car_id = p.id
+                                    LEFT JOIN car_photos i ON i.car_id = p.id
+                                    LEFT JOIN car_features v ON v.car_id = p.id
+                                    WHERE t.lang_id = ?i AND p.id = ?i AND p.status = 1',
+                                    Lang::GetLangID(), 
+                                    (int)$ProductId
+                                );
 	}
 
     public function GetImages($Id, $VariantId)

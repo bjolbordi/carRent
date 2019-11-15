@@ -75,7 +75,7 @@
               <!-- Brand and toggle get grouped for better mobile display -->
               <div class="navbar-header">
 
-                <a class="navbar-brand" href="index.html">LAPE<img src="img/company-logo.png" alt=""/></a>
+                <a class="navbar-brand" href="index.html">LAPE<img src="{{ constants.THEME }}assets/img/company-logo.png" alt=""/></a>
               </div>
 
               <!-- Collect the nav links, forms, and other content for toggling -->

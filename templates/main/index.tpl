@@ -28,100 +28,48 @@
             <div class="rq-car-listing-wrapper">
               <div class="rq-listing-choose rq-listing-grid">
                 <div class="row">
-                  <div class="col-md-4 col-sm-6">
-                    <div class="listing-single">
-                      <div class="listing-img">
-                        <img src="img/car-listing-grid/toyota.jpg" alt="">
-                      </div>
-                      <div class="listing-details">
-                        <h5 class="car-brand">Toyota</h5>
-                        <h3 class="car-name"><a href="listing-detail.html">Toyota Prius</a></h3>
-                        <ul class="rating-list">
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                        </ul>
-                        <ul>
-                          <li>Class: <span>Premium</span></li>
-                          <li>Air Condition: <span>Yes</span></li>
-                          <li>Body Style: <span>Sedan</span></li>
-                          <li>Transmission: <span>Automatic</span></li>
-                        </ul>
-                        <div class="listing-footer">
-                          <span><a href="#">Details</a></span>
-                          <span>
-                            Starting at <span class="price">$28</span> / day
-                          </span>
-                        </div>
+                
+                  {% for p in PopularProducts %}
+                      
+                      <div class="col-md-4 col-sm-6">
+                        <div class="listing-single">
+                          <div class="listing-img">
+                            {% if p.photo_name %}
+                                {% set src = constants.UPLOAD ~ 'cars/' ~ p.photo_name %}
+                            {% else %}
+                                {% set src = constants.THEME ~ 'assets/images/products/no_photo_s.jpg' %}
+                            {% endif %}
+                            <img src="{{src}}" alt="">
+                          </div>
+                          <div class="listing-details">
+                            <h5 class="car-brand">{{ p.car_title }}</h5>
+                            <h3 class="car-name"><a href="{{ globals.uri }}product/detail/{{ p.id }}">{{ p.car_model }}</a></h3>
+                            <ul class="rating-list">
+                              <li><i class="ion-star"></i></li>
+                              <li><i class="ion-star"></i></li>
+                              <li><i class="ion-star"></i></li>
+                              <li><i class="ion-star"></i></li>
+                              <li><i class="ion-star"></i></li>
+                            </ul>
+                            <ul>
+                              <li>Class: <span>{{ p.car_class }}</span></li>
+                              <li>Air Condition: <span>{{ p.car_bstyle }}</span></li>
+                              <li>Body Style: <span>{{ p.car_bstyle }}</span></li>
+                              <li>Transmission: <span>{{ p.car_transmission }}</span></li>
+                            </ul>
+                            <div class="listing-footer">
+                              <span><a href="{{ globals.uri }}product/detail/{{ p.product_id }}/{{ p.variant_id }}">Details</a></span>
+                              <span>
+                                Starting at <span class="price">{{ p.price }}</span> / day
+                              </span>
+                            </div>
 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-6">
-                    <div class="listing-single">
-                      <div class="listing-img">
-                        <img src="img/car-listing-grid/toyotab.jpg" alt="">
-                      </div>
-                      <div class="listing-details">
-                        <h5 class="car-brand">Toyota</h5>
-                        <h3 class="car-name"><a href="listing-detail1.html">Toyota Prius</a></h3>
-                        <ul class="rating-list">
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                        </ul>
-                        <ul>
-                          <li>Class: <span>Premium</span></li>
-                          <li>Air Condition: <span>Yes</span></li>
-                          <li>Body Style: <span>Sedan</span></li>
-                          <li>Transmission: <span>Automatic</span></li>
-                        </ul>
-                        <div class="listing-footer">
-                          <span><a href="#">Details</a></span>
-                          <span>
-                            Starting at <span class="price">$28</span> / day
-                          </span>
+                          </div>
                         </div>
+                      </div>
+                     
+                  {% endfor %}
 
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-6">
-                    <div class="listing-single">
-                      <div class="listing-img">
-                        <img src="img/car-listing-grid/toyotac.jpg" alt="">
-                      </div>
-                      <div class="listing-details">
-                        <h5 class="car-brand">Toyota</h5>
-                        <h3 class="car-name"><a href="listing-detail2.html">Toyota Vitz</a></h3>
-                        <ul class="rating-list">
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                          <li><i class="ion-star"></i></li>
-                        </ul>
-                        <ul>
-                          <li>Class: <span>Suv</span></li>
-                          <li>Air Condition: <span>Yes</span></li>
-                          <li>Body Style: <span>Hatchback</span></li>
-                          <li>Transmission: <span>Automatic</span></li>
-                        </ul>
-                        <div class="listing-footer">
-                          <span><a href="#">Details</a></span>
-                          <span>
-                            Starting at <span class="price">$28</span> / day
-                          </span>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                  
                 </div>
               </div>
               <!-- <div class="rq-pagination">

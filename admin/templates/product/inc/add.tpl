@@ -42,13 +42,6 @@
                                                         <span class="nav-link-in">Photos</span>
                                                     </a>
                                                 </li>
-                                                <li class="nav-item">
-                                                    <a class="nav-link"
-                                                       href="#tabs-variants" role="tab"
-                                                       data-toggle="tab">
-                                                        <span class="nav-link-in">Variants</span>
-                                                    </a>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -89,13 +82,121 @@
 
                                                                         <div class="">
                                                                             <input type="text" class="form-control"
-                                                                                   name="{{ lang }}[title]"
+                                                                                   name="{{ lang }}[car_title]"
                                                                                    placeholder="Name"
-                                                                                   value="{{ post.title }}">
+                                                                                   value="{{ post.car_title }}">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-control-label">Car Model</label>
+
+                                                                        <div class="">
+                                                                            <input type="text" class="form-control"
+                                                                                   name="{{ lang }}[car_model]"
+                                                                                   placeholder="Name"
+                                                                                   value="{{ post.car_model }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-control-label">Car Class</label>
+
+                                                                        <div class="">
+                                                                            <input type="text" class="form-control"
+                                                                                   name="{{ lang }}[car_class]"
+                                                                                   placeholder="Name"
+                                                                                   value="{{ post.car_class }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-control-label">Car Body Style</label>
+
+                                                                        <div class="">
+                                                                            <input type="text" class="form-control"
+                                                                                   name="{{ lang }}[car_bstyle]"
+                                                                                   placeholder="Name"
+                                                                                   value="{{ post.car_bstyle }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-group row">
+                                                                    <div class="col-md-12">
+                                                                        <label class="form-control-label">Car Transmission</label>
+
+                                                                        <div class="">
+                                                                            <input type="text" class="form-control"
+                                                                                   name="{{ lang }}[car_transmission]"
+                                                                                   placeholder="Name"
+                                                                                   value="{{ post.car_transmission }}">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Seats</label>
+                                                            <div>
+                                                                <input type="text" class="form-control"
+                                                                       name="{{ lang }}[car_seats]"
+                                                                       placeholder="Seats"
+                                                                       value="0">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Luggage</label>
+                                                            <div>
+                                                                <input type="text" class="form-control"
+                                                                       name="{{ lang }}[car_luggage]"
+                                                                       placeholder="Luggage"
+                                                                       value="0">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Mileage</label>
+                                                            <div>
+                                                                <input type="text" class="form-control"
+                                                                       name="{{ lang }}[car_mileage]"
+                                                                       placeholder="Mileage"
+                                                                       value="0">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Fuel</label>
+                                                            <div>
+                                                                <input type="text" class="form-control"
+                                                                       name="{{ lang }}[car_fuel]"
+                                                                       placeholder="Fuel"
+                                                                       value="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                             <div class="col-md-12">
                                                                 <div class="form-group row">
                                                                     <div class="col-md-12">
@@ -103,7 +204,7 @@
 
                                                                         <div class="">
                                                                     <textarea class="form-control ckeditor"
-                                                                              name="{{ lang }}[desc]">{{ post.desc }}</textarea>
+                                                                              name="{{ lang }}[car_desc]">{{ post.desc }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -114,21 +215,8 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-md-3">
-                                                    <div class="form-group row">
-                                                        <div class="col-md-12">
-                                                            <label class="form-control-label">Featured</label>
-
-                                                            <div class="checkbox checkbox-only">
-                                                                <input id="featured" type="checkbox"
-                                                                       name="featured"
-                                                                       value="1">
-                                                                <label for="featured"></label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
+                                                
+                                                <div class="col-md-12">
                                                     <div class="form-group row">
                                                         <div class="col-md-12">
                                                             <label class="form-control-label">Price</label>
@@ -141,60 +229,191 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                                 <div class="col-md-3">
                                                     <div class="form-group row">
                                                         <div class="col-md-12">
-                                                            <label class="form-control-label">Sale (Price)</label>
-                                                            <div>
-                                                                <input type="text" class="form-control"
-                                                                       name="sale"
-                                                                       placeholder="Sale"
-                                                                       value="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="form-group row">
-                                                        <div class="col-md-12">
-                                                            <label class="form-control-label">Sale End Date</label>
+                                                            <label class="form-control-label">Airconditions</label>
 
-                                                            <div class="date">
-                                                                <input type="text" class="form-control datetimepicker-1"
-                                                                       name="sale_end_date"
-                                                                       placeholder="Name"
-                                                                       value="">
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="airconditions" type="checkbox"
+                                                                       name="airconditions"
+                                                                       value="1" checked>
+                                                                <label for="airconditions"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Music</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="music" type="checkbox"
+                                                                       name="music"
+                                                                       value="1" checked>
+                                                                <label for="music"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Water</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="water" type="checkbox"
+                                                                       name="water"
+                                                                       value="1" checked>
+                                                                <label for="water"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Audio input</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="audio" type="checkbox"
+                                                                       name="audio"
+                                                                       value="1" checked>
+                                                                <label for="audio"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Climat Control</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="climat" type="checkbox"
+                                                                       name="climat"
+                                                                       value="1" checked>
+                                                                <label for="climat"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Child Seats</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="child" type="checkbox"
+                                                                       name="child"
+                                                                       value="1" checked>
+                                                                <label for="child"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Aux</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="aux" type="checkbox"
+                                                                       name="aux"
+                                                                       value="1" checked>
+                                                                <label for="aux"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Bluetooth</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="bluetooth" type="checkbox"
+                                                                       name="bluetooth"
+                                                                       value="1" checked>
+                                                                <label for="bluetooth"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Car Kit</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="kit" type="checkbox"
+                                                                       name="kit"
+                                                                       value="1" checked>
+                                                                <label for="kit"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">GPS</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="gps" type="checkbox"
+                                                                       name="gps"
+                                                                       value="1" checked>
+                                                                <label for="gps"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Seat Belts</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="belts" type="checkbox"
+                                                                       name="belts"
+                                                                       value="1" checked>
+                                                                <label for="belts"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Onboard Computer</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="computer" type="checkbox"
+                                                                       name="computer"
+                                                                       value="1" checked>
+                                                                <label for="computer"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group row">
+                                                        <div class="col-md-12">
+                                                            <label class="form-control-label">Remote Central Looking</label>
+
+                                                            <div class="checkbox checkbox-only">
+                                                                <input id="looking" type="checkbox"
+                                                                       name="looking"
+                                                                       value="1" checked>
+                                                                <label for="looking"></label>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12 col-xs-12">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Brand</label>
-                                                        <select  class="select2" name="brand_id">
-                                                            <option value="0">None</option>
-                                                            {% for b in brands %}
-                                                                <option value="{{ b.brand_id }}">{{ b.title }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12 col-xs-12">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Category</label>
-                                                        <select  class="select2" name="categories[]" multiple="multiple">
-                                                            {% for c in categories %}
-                                                                <option value="{{ c.category_id }}">{{ c.title }}</option>
-                                                            {% endfor %}
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            
                                         <!-- Photos -->
                                         <div role="tabpanel" class="tab-pane fade in" id="tabs-photos">
                                             <div class="row">
@@ -207,10 +426,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- Variants -->
-                                        <div role="tabpanel" class="tab-pane fade in" id="tabs-variants">
-                                            variants
                                         </div>
                                         {% if message %}
                                             <div class="row">

@@ -56,31 +56,22 @@ class Product extends Controller
 
 	}
 
-	public function Detail($Id = 0, $VariantId = 0, $Ajax = false)
+	public function Detail($Id = 0, $Ajax = false)
 	{
 		if(empty((int)$Id))
 			$this->Model->Error();
-		$this->Model->Params['Product'] = $this->Model->GetProduct((int)$Id, (int)$VariantId);
+		$this->Model->Params['Product'] = $this->Model->GetProduct((int)$Id);
         if(!$this->Model->Params['Product'])
             $this->Model->Error();
-        $this->Model->Params['Images'] = $this->Model->GetImages((int)$Id, (int)$VariantId);
-		$this->Model->Params['Variant'] = $this->Model->GetVariant((int)$VariantId);
-		$this->Model->Params['Attr'] = $this->Model->GetAttr((int)$Id);
-		$this->Model->Params['VariantAttr'] = $this->Model->GetVariantAttr((int)$VariantId);
 
-		$this->Model->SaveHistory((int)$Id);
+
+		
         if($Ajax){
             $this->Model->Params['FavoritesArray'] =  json_decode(Cookie::Get('favorites'), true);
             return $this->View->Render('product/ajax_detail.tpl', $this->Model->Params, true);
         }
         else{
-            $this->Model->SetMetaData(
-                [
-                    'title' => $this->Model->Params['Product']['title'],
-                    'desc' => $this->Model->Params['Product']['desc']
-                ]);
-            $this->Model->Params['SimilarProducts'] = $this->Model->SimilarProducts((int)$Id);
-            $this->Model->Params['HistoryProducts'] = $this->Model->HistoryProducts((int)$Id, 8);
+            
             $this->View->Render('product/detail.tpl', $this->Model->Params);
         }
 	}

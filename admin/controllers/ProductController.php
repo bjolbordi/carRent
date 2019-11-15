@@ -10,7 +10,9 @@ class Product extends Controller
 
     public function Index()
     {
+        echo 123;
         $this->Model->Params['items'] = $this->Model->GetItems()['Data'];
+
         $this->Model->Params['Page'] = Request::Get('page') ? (int)Request::Get('page') : 1;
         // set url
         Request::UnSetGet('url');
@@ -21,8 +23,10 @@ class Product extends Controller
 
 	public function Add()
 	{
+        
         if(Request::Post()){
             $Result = $this->Model->Insert(Request::Post());
+            echo $Result['Status'];
             if($Result['Status'])
                 header('location: '.URL.$this->Model->Lang .'/product/');
             else

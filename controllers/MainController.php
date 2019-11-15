@@ -19,8 +19,9 @@ class Main extends Controller
 	{
 		
 		$this->Model->Params['Slides'] = $this->Model->GetSlider();
-		$this->Model->Params['News'] = $this->Model->GetLastNews(5);
-
+	
+		$this->Model->Params['PopularProducts'] = $this->Model->GetProducts(1, 8);
+		
 		//Functions::Pre($this->Model->Params['LastProducts']);
 		$this->View->render('main/index.tpl', $this->Model->Params);
 	}
