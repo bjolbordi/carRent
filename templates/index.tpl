@@ -82,14 +82,14 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
-                    <a href="index.html" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                    <a href="main" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
 
                   </li>
                   <li class="dropdown">
-                    <a href="about-us.html">About</a>
+                    <a href="about">About</a>
                   </li>
                   <li class="dropdown">
-                    <a href="contact-us.html">Contact</a>
+                    <a href="contact">Contact</a>
                   </li>
                 </ul>
               </div><!-- /.navbar-collapse -->

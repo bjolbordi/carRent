@@ -6,67 +6,64 @@
 {% endblock %}
 
 {% block content %}
-    <!-- Main of the Page -->
-    <main id="mt-main">
-      <!-- Mt Contact Banner of the Page -->
-      <section class="mt-contact-banner wow fadeInUp" data-wow-delay="0.4s">
+          <div class="inner-page-banner" style="background: url('img/inner-banner/contact-us.jpg') top center no-repeat; background-size: cover;">
+        <div class="rq-overlay"></div>
         <div class="container">
-          <div class="row">
-            <div class="col-xs-12 text-center">
-              <h1>{{ langs.contact }}</h1>
-              <nav class="breadcrumbs">
-                <ul class="list-unstyled">
-                  <li><a href="{{ globals.uri }}">{{ langs.main }} <i class="fa fa-angle-right"></i></a></li>
-                  <li><a href="#">{{ langs.contact }}</a></li>
-                </ul>
-              </nav>
-            </div>
+          <div class="rq-title-container bredcrumb-title text-center">
+            <h2 class="rq-title">Contact Us</h2>
+            <ol class="breadcrumb rq-subtitle">
+              <li><a href="#">Home</a></li>
+              <li class="active">Contact Us</li>
+            </ol>
           </div>
         </div>
-      </section><!-- Mt Contact Banner of the Page -->
-      <!-- Mt Contact Detail of the Page -->
-      <section class="mt-contact-detail content-info wow fadeInUp" data-wow-delay="0.4s">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-xs-12 col-sm-8">
-              <div class="txt-wrap">
-                <h2>{{ langs.contact_info }}</h2>
-                <p>{{ contact.contact_desc }}</p>
+      </div> <!-- /. inner pagebanner -->
+      <div class="rq-page-content">
+        <div class="rq-content-block">
+          <div class="container">
+            <div class="rq-contact-us-grid-block"> <!-- start info portion -->
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="grid-block-single">
+                    <i class="icon_mobile"></i>
+                    <h3>Phone</h3>
+                    <p>+995 598 55 55 66(Whatsapp, Telegram, Viber)</p>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="grid-block-single">
+                    <i class="icon_pin_alt"></i>
+                    <h3>Address</h3>
+                    <p>29 Nadira Kosharauli str. Tbilisi Georgia </p>
+                    
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="grid-block-single">
+                    <i class="icon_mail_alt"></i>
+                    <h3>Email</h3>
+                    <p>petreelbaqidze@gmail.com</p>
+                  </div>
+                </div>
               </div>
-              <ul class="list-unstyled contact-txt">
-                <li>
-                  <strong>{{ langs.address }}</strong>
-                  <address>{{ contact.contact_address }}</address>
-                </li>
-                <li>
-                  <strong>{{ langs.phone }}</strong>
-                  <a href="#">{{ contact.contact_phone1 }}{{ contact.contact_phone2 ? '; ' ~ contact.contact_phone2 }}</a>
-                </li>
-                <li>
-                  <strong>{{ langs.email }}</strong>
-                  <a href="#">{{ contact.contact_email1 }}</a>
-                </li>
-              </ul>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-              <h2>{{ langs.contact }}</h2>
-              <!-- Contact Form of the Page -->
-              <form id="contactform" class="contact-form" name="contactform" method="post" novalidate>
-                <fieldset>
-                  <input name="name" type="text" class="form-control" placeholder="{{ langs.name }}">
-                  <input  name="email" type="email" class="form-control" placeholder="{{ langs.email }}">
-                  <input name="subject" type="text" class="form-control" placeholder="{{ langs.subject }}">
-                  <textarea name="message" class="form-control" placeholder="{{ langs.message }}"></textarea>
-                  <input type="hidden" name="ajax" value="true">
-                  <button class="btn-type3" id="submit" type="submit">{{ langs.send_message }}</button>
-                </fieldset>
+            </div> <!-- end info portion -->
+
+            <div class="rq-contact-us-form-content"> <!-- start message form -->
+              <!-- <h3>If you got any questions <br>please do not hesitate to send us a message</h3>
+              <form action="#">
+                <input type="text" class="contact-form-input" placeholder="Your name">
+                <input type="email" class="contact-form-input" placeholder="Your email">
+                <input type="text" class="contact-form-input" placeholder="Subject">
+                <textarea class="contact-form-input" placeholder="Message"></textarea>
+                <div class="submit-btn">
+                  <button type="submit" class="rq-btn rq-btn-primary">Send Message</button>
+                </div>
               </form>
-              <!-- Contact Form of the Page end -->
-            </div>
+            </div> --> <!-- end message form -->\ 
           </div>
         </div>
-      </section><!-- Mt Contact Detail of the Page end -->
-    </main>
+      </div>
+    </div> <!-- end #main-wrapper -->
 {% endblock %}
 
 {% block footer %}

@@ -69,7 +69,6 @@
                         <th>image</th>
                         <th>Title</th>
                         <th>Status</th>
-                        <th>PipeDrive</th>
                         <th>Views</th>
                         <th>Created date</th>
                         <th>Action</th>
@@ -78,30 +77,29 @@
                     <tbody>
                     {% for p in items %}
                         {% if p.image %}
-                            {% set src = '<img src="' ~ constants.SITE_URL ~ 'upload/product/s_' ~ p.image ~ '" height="50"/>' %}
+                            {% set src = '<img src="' ~ constants.SITE_URL ~ 'upload/cars/s_' ~ p.image ~ '" height="50"/>' %}
                         {% else %}
                             {% set src = '<img src="' ~ constants.URL ~ 'templates/assets/img/no-image.png" height="50"/>' %}
                         {% endif %}
-                        <tr data-id="{{ p.product_id }}">
+                        <tr data-id="{{ p.id }}">
                             <td class="table-check">
                                 <div class="checkbox checkbox-only">
                                     <input type="checkbox" id="table-check-1"/>
                                     <label for="table-check-1"></label>
                                 </div>
                             </td>
-                            <td>{{ p.product_id }}</td>
+                            <td>{{ p.id }}</td>
                             <td>{{ src | raw }}</td>
-                            <td>{{ p.title }}</td>
-                            <td>{{ p.status_id == 1 ? '<span class="color-green">Published</span>' : '<span class="color-red">Disabled</span>' }}</td>
-                            <td>{{ p.pipedrive_id > 0 ? '<span class="color-green">PipeDrive</span>' : '<span class="color-red">PipeDrive</span>' }}</td>
+                            <td>{{ p.car_title }}</td>
+                            <td>{{ p.status == 1 ? '<span class="color-green">Published</span>' : '<span class="color-red">Disabled</span>' }}</td>
                             <td>{{ p.views }}</td>
-                            <td>{{ p.created_date }}</td>
+                            <td>{{ p.created_at }}</td>
                             <td class="">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <a href="{{ globals.uri }}product/edit/{{ p.product_id }}/" class="btn btn-default btn-sm"><i
+                                    <a href="{{ globals.uri }}product/edit/{{ p.id }}/" class="btn btn-default btn-sm"><i
                                                 class="fa fa-edit"></i></a>
-                                    <a href="{{ globals.uri }}product/remove/{{ p.product_id }}/"
-                                       class="btn btn-danger btn-sm remove" data-id="{{ p.product_id }}"><i class="fa fa-remove"></i></a>
+                                    <a href="{{ globals.uri }}product/remove/{{ p.id }}/"
+                                       class="btn btn-danger btn-sm remove" data-id="{{ p.id }}"><i class="fa fa-remove"></i></a>
                                 </div>
                             </td>
                         </tr>

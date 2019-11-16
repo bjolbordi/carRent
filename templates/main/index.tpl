@@ -53,12 +53,12 @@
                             </ul>
                             <ul>
                               <li>Class: <span>{{ p.car_class }}</span></li>
-                              <li>Air Condition: <span>{{ p.car_bstyle }}</span></li>
+                              <li>Air Condition: <span>{% if p.airconditions %} Yes {% else %} No {% endif %} </span></li>
                               <li>Body Style: <span>{{ p.car_bstyle }}</span></li>
                               <li>Transmission: <span>{{ p.car_transmission }}</span></li>
                             </ul>
                             <div class="listing-footer">
-                              <span><a href="{{ globals.uri }}product/detail/{{ p.product_id }}/{{ p.variant_id }}">Details</a></span>
+                              <span><a href="{{ globals.uri }}product/detail/{{ p.id }}">Details</a></span>
                               <span>
                                 Starting at <span class="price">{{ p.price }}</span> / day
                               </span>

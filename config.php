@@ -42,13 +42,7 @@ define('SMS_SENDER_NAME', 'FUFALA');
 define('SMS_SEND_URL', 'http://smsoffice.ge/api/send.aspx?');
 define('SMS_MESSAGE', 'Gilocavt! Tqveni shekveta warmatrbit gaigzavna. Shekvetis nomeri #{OrderId}, Tanxa: {Amount} lari. Miwodebis savaraudo tarigi: {Date}. Gmadlobt, rom gvendobit.');
 
-// Shiping options
-define('SHIPING_TBILSI_PRICE', 3.6); // თბილისში მიწოდების ფასი
-define('SHIPING_TBILSI_FREE', 45); // ფასიანი მიწოდების ზღვარი
-define('SHIPING_TBILSI_DAY', 1); // თბილსიში მიწოდების დღეების რაოდენობა
-define('SHIPING_REGION_PRICE', 8); // რეგიონში მიწოდების ფასი
-define('SHIPING_REGION_FREE', 999999); // ფასიანი მიწოდების ზღვარი
-define('SHIPING_REGION_DAY', 2); // რეგიონში მიწოდების დღეების რაოდენობა
+
 
 // PipeDrive options
 define('API_KEY', '619c64ccb3eb4e645837dbbe867412962aa428f8');

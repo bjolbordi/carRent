@@ -30,7 +30,7 @@ class ProductModel extends Model
 									LEFT JOIN cars_trans t ON t.car_id = p.id
 									LEFT JOIN car_features v ON v.car_id = p.id
 									LEFT JOIN car_photos i ON i.car_id = p.id
-									WHERE t.lang_id = 1 AND p.status != 0 ' . $Where . '
+									WHERE t.lang_id = 2  AND p.status != 0 ' . $Where . '
 									GROUP BY p.id
 									ORDER BY p.id DESC ' . $Limit);
         $this->Params['ContentCount'] = $this->DB->GetOne('SELECT found_rows()');
@@ -197,6 +197,22 @@ class ProductModel extends Model
 		$this->DB->Query('INSERT INTO cars SET ?u ', $Params);
 		$Id = $this->DB->insertId();
        
+        $features['car_id'] = $Id;
+        $features['airconditions'] = (isset($Post['airconditions']) ? 1 : 0);
+        $features['music'] = (isset($Post['music']) ? 1 : 0);
+        $features['water'] = (isset($Post['water']) ? 1 : 0);
+        $features['audio_input'] = (isset($Post['audio_input']) ? 1 : 0);
+        $features['climate_control'] = (isset($Post['climate_control']) ? 1 : 0);
+        $features['child_seats'] = (isset($Post['child_seats']) ? 1 : 0);
+        $features['aux'] = (isset($Post['aux']) ? 1 : 0);
+        $features['bluetooth'] = (isset($Post['bluetooth']) ? 1 : 0);
+        $features['car_kit'] = (isset($Post['car_kit']) ? 1 : 0);
+        $features['seat_belts'] = (isset($Post['seat_belts']) ? 1 : 0);
+        $features['onboard_computer'] = (isset($Post['onboard_computer']) ? 1 : 0);
+        $features['remote_central_looking'] = (isset($Post['remote_central_looking']) ? 1 : 0);
+
+        $this->DB->Query('INSERT INTO car_features SET ?u ', $features);
+
 		foreach ($Post as $Lang => $Val) {
             
             
@@ -207,6 +223,7 @@ class ProductModel extends Model
 			}
 		}
         
+
 
 		if(Request::File('images')['name']){
 			$Image = new Image();
@@ -309,20 +326,14 @@ class ProductModel extends Model
 
     public function RemoveItem($Id)
     {
-        $Photos = $this->DB->GetAll('SELECT * FROM product_photos  WHERE content_id = ?i', $Id);
+        $Photos = $this->DB->GetAll('SELECT * FROM car_photos  WHERE car_id = ?i', $Id);
 
-        $this->DB->Query('DELETE FROM products WHERE product_id = ?i', $Id);
-        $this->DB->Query('DELETE FROM products_trans WHERE product_id = ?i', $Id);
-        $this->DB->Query('DELETE FROM product_photos WHERE content_id = ?i', $Id);
+        $this->DB->Query('DELETE FROM cars WHERE id = ?i', $Id);
+        $this->DB->Query('DELETE FROM cars_trans WHERE car_id = ?i', $Id);
+        $this->DB->Query('DELETE FROM car_photos WHERE car_id = ?i', $Id);
 
-        $this->DB->Query('DELETE FROM products_variants WHERE product_id = ?i', $Id);
-        $this->DB->Query('DELETE FROM products_variant_photos WHERE variant_id IN(SELECT variant_id FROM products_variants WHERE product_id = ?i)', $Id);
-        $this->DB->Query('DELETE FROM products_variant_attrs WHERE product_id = ?i', $Id);
 
-        $this->DB->Query('DELETE FROM product_to_categories WHERE product_id = ?i', $Id);
-        $this->DB->Query('DELETE FROM product_to_tags WHERE product_id = ?i', $Id);
-
-        $ThumbPath = UPLOAD_PATH . 'product/';
+        $ThumbPath = UPLOAD_PATH . 'cars/';
 
         foreach ($Photos as $Photo) {
             @unlink($ThumbPath . $Photo['photo_name']);

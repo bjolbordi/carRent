@@ -67,13 +67,13 @@ class MainModel extends Model
     {
         $OrderBy = 'p.id DESC';
         return $Data = $this->DB->GetAll('SELECT
-                  *
+                  p.id,p.price,t.car_model,t.car_title,t.car_class,t.car_bstyle,t.car_transmission, v.airconditions, i.photo_name
                   FROM cars p
                   LEFT JOIN cars_trans t ON t.car_id = p.id
                   LEFT JOIN car_photos i ON i.car_id = p.id
                   LEFT JOIN car_features v ON v.car_id = p.id
                   WHERE t.lang_id = ?i AND p.status = 1 
-                  ORDER BY ' . $OrderBy . ' LIMIT ' . $Limit, 
+                  ORDER BY ' . $OrderBy, 
                   Lang::GetLangID()
                 );
     }

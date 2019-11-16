@@ -10,8 +10,9 @@ class Product extends Controller
 
     public function Index()
     {
-        echo 123;
+      
         $this->Model->Params['items'] = $this->Model->GetItems()['Data'];
+        
 
         $this->Model->Params['Page'] = Request::Get('page') ? (int)Request::Get('page') : 1;
         // set url

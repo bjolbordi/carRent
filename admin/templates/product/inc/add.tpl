@@ -278,10 +278,10 @@
                                                             <label class="form-control-label">Audio input</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="audio" type="checkbox"
-                                                                       name="audio"
+                                                                <input id="audio_input" type="checkbox"
+                                                                       name="audio_input"
                                                                        value="1" checked>
-                                                                <label for="audio"></label>
+                                                                <label for="audio_input"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -292,10 +292,10 @@
                                                             <label class="form-control-label">Climat Control</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="climat" type="checkbox"
-                                                                       name="climat"
+                                                                <input id="climate_control" type="checkbox"
+                                                                       name="climate_control"
                                                                        value="1" checked>
-                                                                <label for="climat"></label>
+                                                                <label for="climate_control"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -306,10 +306,10 @@
                                                             <label class="form-control-label">Child Seats</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="child" type="checkbox"
-                                                                       name="child"
+                                                                <input id="child_seats" type="checkbox"
+                                                                       name="child_seats"
                                                                        value="1" checked>
-                                                                <label for="child"></label>
+                                                                <label for="child_seats"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -348,10 +348,10 @@
                                                             <label class="form-control-label">Car Kit</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="kit" type="checkbox"
-                                                                       name="kit"
+                                                                <input id="car_kit" type="checkbox"
+                                                                       name="car_kit"
                                                                        value="1" checked>
-                                                                <label for="kit"></label>
+                                                                <label for="car_kit"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -376,10 +376,10 @@
                                                             <label class="form-control-label">Seat Belts</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="belts" type="checkbox"
-                                                                       name="belts"
+                                                                <input id="seat_belts" type="checkbox"
+                                                                       name="seat_belts"
                                                                        value="1" checked>
-                                                                <label for="belts"></label>
+                                                                <label for="seat_belts"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -390,10 +390,10 @@
                                                             <label class="form-control-label">Onboard Computer</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="computer" type="checkbox"
-                                                                       name="computer"
+                                                                <input id="onboard_computer" type="checkbox"
+                                                                       name="onboard_computer"
                                                                        value="1" checked>
-                                                                <label for="computer"></label>
+                                                                <label for="onboard_computer"></label>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -404,10 +404,10 @@
                                                             <label class="form-control-label">Remote Central Looking</label>
 
                                                             <div class="checkbox checkbox-only">
-                                                                <input id="looking" type="checkbox"
-                                                                       name="looking"
+                                                                <input id="remote_central_looking" type="checkbox"
+                                                                       name="remote_central_looking"
                                                                        value="1" checked>
-                                                                <label for="looking"></label>
+                                                                <label for="remote_central_looking"></label>
                                                             </div>
                                                         </div>
                                                     </div>
