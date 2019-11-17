@@ -82,14 +82,14 @@
               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                   <li class="dropdown">
-                    <a href="main" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                    <a href="{{ globals.uri }}main" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
 
                   </li>
                   <li class="dropdown">
-                    <a href="about">About</a>
+                    <a href="{{ globals.uri }}about">About</a>
                   </li>
                   <li class="dropdown">
-                    <a href="contact">Contact</a>
+                    <a href="{{ globals.uri }}contact">Contact</a>
                   </li>
                 </ul>
               </div><!-- /.navbar-collapse -->

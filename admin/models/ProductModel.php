@@ -30,9 +30,9 @@ class ProductModel extends Model
 									LEFT JOIN cars_trans t ON t.car_id = p.id
 									LEFT JOIN car_features v ON v.car_id = p.id
 									LEFT JOIN car_photos i ON i.car_id = p.id
-									WHERE t.lang_id = 2  AND p.status != 0 ' . $Where . '
+									WHERE t.lang_id = ?i  AND p.status != 0 ' . $Where . '
 									GROUP BY p.id
-									ORDER BY p.id DESC ' . $Limit);
+									ORDER BY p.id DESC ' . $Limit, Lang::GetLangID());
         $this->Params['ContentCount'] = $this->DB->GetOne('SELECT found_rows()');
         $this->SetResult(true, '', $Data);
         return $this->Result;

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-          <div class="inner-page-banner" style="background: url('img/inner-banner/contact-us.jpg') top center no-repeat; background-size: cover;">
+          <div class="inner-page-banner" style="background: url('{{ constants.THEME }}assets/img/inner-banner/contact-us.jpg') top center no-repeat; background-size: cover;">
         <div class="rq-overlay"></div>
         <div class="container">
           <div class="rq-title-container bredcrumb-title text-center">
@@ -27,14 +27,14 @@
                   <div class="grid-block-single">
                     <i class="icon_mobile"></i>
                     <h3>Phone</h3>
-                    <p>+995 598 55 55 66(Whatsapp, Telegram, Viber)</p>
+                    <p>{{ contact.contact_phone1 }}{{ contact.contact_phone2 ? '; ' ~ contact.contact_phone2 }} (Whatsapp, Telegram, Viber)</p>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="grid-block-single">
                     <i class="icon_pin_alt"></i>
                     <h3>Address</h3>
-                    <p>29 Nadira Kosharauli str. Tbilisi Georgia </p>
+                    <p>{{ contact.contact_address }}</p>
                     
                   </div>
                 </div>
@@ -42,7 +42,7 @@
                   <div class="grid-block-single">
                     <i class="icon_mail_alt"></i>
                     <h3>Email</h3>
-                    <p>petreelbaqidze@gmail.com</p>
+                    <p>{{ contact.contact_email1 }}</p>
                   </div>
                 </div>
               </div>
